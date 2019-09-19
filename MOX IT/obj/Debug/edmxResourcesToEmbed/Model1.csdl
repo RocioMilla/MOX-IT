@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VuelosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="LineaAerea">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Vuelo" Relationship="Self.FK__Vuelo__IDLineaAe__4BAC3F29" FromRole="LineaAerea" ToRole="Vuelo" />
+  </EntityType>
+  <EntityType Name="Vuelo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="HorarioLlegada" Type="DateTime" Precision="0" />
+    <Property Name="Demorado" Type="Boolean" />
+    <Property Name="IDLineaAerea" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="LineaAerea" Relationship="Self.FK__Vuelo__IDLineaAe__4BAC3F29" FromRole="Vuelo" ToRole="LineaAerea" />
+    <Property Name="NumeroDeVuelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__Vuelo__IDLineaAe__4BAC3F29">
+    <End Role="LineaAerea" Type="Self.LineaAerea" Multiplicity="1" />
+    <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LineaAerea">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Vuelo">
+        <PropertyRef Name="IDLineaAerea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VuelosEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LineaAerea" EntityType="Self.LineaAerea" />
+    <EntitySet Name="Vuelo" EntityType="Self.Vuelo" />
+    <AssociationSet Name="FK__Vuelo__IDLineaAe__4BAC3F29" Association="Self.FK__Vuelo__IDLineaAe__4BAC3F29">
+      <End Role="LineaAerea" EntitySet="LineaAerea" />
+      <End Role="Vuelo" EntitySet="Vuelo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

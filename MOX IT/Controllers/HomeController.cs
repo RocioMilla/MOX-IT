@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MOX_IT.Models;
+using MOX_IT.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,18 +15,50 @@ namespace MOX_IT.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Vuelos()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewBag.vuelos = ServicioVuelos.obtenerTodos();
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult AltaVuelo()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+
+        [HttpPost]
+        public ActionResult AltaVuelo(VuelosForm vuelo)
+        {
+            if (ModelState.IsValid)
+            {
+                ServicioVuelos.crearVuelo(vuelo);
+                TempData["respuesta"] = "Vuelo creado satisfactoriamente.";
+                return Redirect("Vuelos");
+            }
+            else {
+                return Redirect("AltaVuelos");
+            }
+        }
+
+        public ActionResult ModificarVuelo(int id)
+        {
+            ViewBag.vuelo = ServicioVuelos.obtenerVueloPorID(id);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ModificarVuelo(VuelosForm vuelo, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                ServicioVuelos.modificarVuelo(vuelo, id);
+                TempData["respuesta"] = "Vuelo modificado satisfactoriamente.";
+                return Redirect("Vuelos");
+            }
+            else {
+                return Redirect("ModificarVuelo");
+            }
+        }
+
     }
 }

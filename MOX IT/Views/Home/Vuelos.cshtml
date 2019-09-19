@@ -1,0 +1,128 @@
+﻿﻿@{
+    ViewBag.Title = "Vuelos";
+}
+@section css
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+}
+
+@if (TempData["respuesta"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["respuesta"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="bg-light fondo pt-4 ">
+    <div class="text-right mr-3">
+        <a href="@Url.Action("crear-vuelo", "Home")" class="btn btn-success ">Crear vuelo</a>
+
+    </div>
+    <div class="p-3 m-3 border bg-white">
+
+        <table id="tabla" class="table table-striped ">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Horario de llegada</th>
+                    <th scope="col" class="text-center">Vuelo</th>
+                    <th scope="col" class="text-center">Línea aérea</th>
+                    <th scope="col" class="text-center">Demorado</th>
+                    <th scope="col" class="text-center"></th>
+                    <th scope="col" class="text-center"></th>
+                    <th scope="col" class="text-center"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Vuelo vuelo in ViewBag.vuelos)
+                {
+                <tr>
+                    <th class="text-center">@vuelo.HorarioLlegada</th>
+                    <th class="text-center">@vuelo.NumeroDeVuelo</th>
+                    <th class="text-center">@vuelo.LineaAerea.Nombre</th>
+                    <th class="text-center">@vuelo.Demorado</th>
+                    <th class="text-center"><a href="@Url.Action("editar-vuelo", "Home")/@vuelo.ID" class="btn btn-warning">Editar</a></th>
+                    <th class="text-center"><a data-toggle="modal" data-id="@vuelo.ID" href="#eliminar" class="btn btn-danger eliminar">Eliminar</a></th>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div class="modal hide" tabindex="-1" id="eliminar" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar artículo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("eliminarVuelo", "Home", FormMethod.Post))
+            {
+                <div class="modal-body">
+                    ¿Está seguro de que desea eliminar este vuelo?
+
+                    <input type="hidden" name="id" id="confirmar" value="" />
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-danger" value="Eliminar">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>$(document).ready(function () {
+                $('#tabla').DataTable({
+                    "dom": '<"top my-2 justify-content-start"l><"top my-2 d-flex justify-content-md-end justify-content-center"f><"overflow-auto"<t>"<"bottom text-left mt-1"i><"justify-content-md-right justify-content-left "p>>',
+                    language: {
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Mostrar _MENU_ vuelos",
+                        "sZeroRecords":    "No se encontraron resultados",
+                        "sEmptyTable":     "No hay vuelos",
+                        "sInfo":           "Mostrando vuelos del _START_ al _END_ de un total de _TOTAL_ vuelos",
+                        "sInfoEmpty":      "Mostrando vuelos del 0 al 0 de un total de 0 vuelos",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ vuelos)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    },
+                });
+            });
+
+            $(document).on("click", ".eliminar", function () {
+                var id = $(this).data('id');
+                $(".modal-body #confirmar").val(id);
+            });</script>
+
+
+
+}
