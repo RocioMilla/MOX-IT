@@ -11,13 +11,13 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="HorarioLlegada" Type="date" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HorarioLlegada" Type="time" Precision="7" />
     <Property Name="Demorado" Type="bit" />
-    <Property Name="IDLineaAerea" Type="int" Nullable="false" />
     <Property Name="NumeroDeVuelo" Type="varchar" MaxLength="100" />
+    <Property Name="IDLineaAerea" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Vuelo__IDLineaAe__4BAC3F29">
+  <Association Name="FK__Vuelo__IDLineaAe__4E88ABD4">
     <End Role="LineaAerea" Type="Self.LineaAerea" Multiplicity="1" />
     <End Role="Vuelo" Type="Self.Vuelo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -32,7 +32,7 @@
   <EntityContainer Name="VuelosModelStoreContainer">
     <EntitySet Name="LineaAerea" EntityType="Self.LineaAerea" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vuelo" EntityType="Self.Vuelo" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Vuelo__IDLineaAe__4BAC3F29" Association="Self.FK__Vuelo__IDLineaAe__4BAC3F29">
+    <AssociationSet Name="FK__Vuelo__IDLineaAe__4E88ABD4" Association="Self.FK__Vuelo__IDLineaAe__4E88ABD4">
       <End Role="LineaAerea" EntitySet="LineaAerea" />
       <End Role="Vuelo" EntitySet="Vuelo" />
     </AssociationSet>

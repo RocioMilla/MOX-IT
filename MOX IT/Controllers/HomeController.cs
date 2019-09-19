@@ -21,8 +21,10 @@ namespace MOX_IT.Controllers
             return View();
         }
 
+        [ActionName("crear-vuelo")]
         public ActionResult AltaVuelo()
         {
+            ViewBag.lineasAereas = ServicioLineasAereas.obtenerTodas();
             return View();
         }
 
@@ -36,7 +38,8 @@ namespace MOX_IT.Controllers
                 return Redirect("Vuelos");
             }
             else {
-                return Redirect("AltaVuelos");
+                TempData["error"] = "Vuelo creado satisfactoriamente.";
+                return Redirect("crear-vuelo");
             }
         }
 

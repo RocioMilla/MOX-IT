@@ -12,12 +12,11 @@ namespace MOX_IT.Models
         public string numeroDeVuelo { get; set; }
 
         [Required]
-        public DateTime horaLlegada { get; set; }
+        public TimeSpan horaLlegada { get; set; }
 
         [Required]
         public int lineaAerea { get; set; }
 
-        [Required]
         public bool demorado { get; set; }
 
 

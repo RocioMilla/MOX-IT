@@ -12,11 +12,11 @@
     <EntitySetMapping Name="Vuelo">
       <EntityTypeMapping TypeName="VuelosModel.Vuelo">
         <MappingFragment StoreEntitySet="Vuelo">
-          <ScalarProperty Name="NumeroDeVuelo" ColumnName="NumeroDeVuelo" />
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="HorarioLlegada" ColumnName="HorarioLlegada" />
           <ScalarProperty Name="Demorado" ColumnName="Demorado" />
           <ScalarProperty Name="IDLineaAerea" ColumnName="IDLineaAerea" />
+          <ScalarProperty Name="NumeroDeVuelo" ColumnName="NumeroDeVuelo" />
+          <ScalarProperty Name="HorarioLlegada" ColumnName="HorarioLlegada" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

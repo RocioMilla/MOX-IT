@@ -15,11 +15,11 @@ namespace MOX_IT
     public partial class Vuelo
     {
         public int ID { get; set; }
-        public Nullable<System.DateTime> HorarioLlegada { get; set; }
         public Nullable<bool> Demorado { get; set; }
         public int IDLineaAerea { get; set; }
         public string NumeroDeVuelo { get; set; }
-
+        public Nullable<System.TimeSpan> HorarioLlegada { get; set; }
+    
         public virtual LineaAerea LineaAerea { get; set; }
     }
 }
