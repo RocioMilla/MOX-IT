@@ -28,5 +28,11 @@ namespace MOX_IT.Servicios
         {
             VuelosDao.modificarVuelo(vuelo, id);
         }
+
+        public static void eliminar(int id)
+        {
+            VuelosDao.eliminarVuelo(id);
+
+        }
     }
 }

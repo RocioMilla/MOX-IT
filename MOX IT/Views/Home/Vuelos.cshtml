@@ -33,18 +33,16 @@
                     <th scope="col" class="text-center">Demorado</th>
                     <th scope="col" class="text-center"></th>
                     <th scope="col" class="text-center"></th>
-                    <th scope="col" class="text-center"></th>
-
                 </tr>
             </thead>
             <tbody>
                 @foreach (Vuelo vuelo in ViewBag.vuelos)
                 {
                 <tr>
-                    <th class="text-center">@vuelo.HorarioLlegada</th>
+                    <th class="text-center">@string.Format("{0:hh\\:mm}", vuelo.HorarioLlegada)</th>
                     <th class="text-center">@vuelo.NumeroDeVuelo</th>
                     <th class="text-center">@vuelo.LineaAerea.Nombre</th>
-                    <th class="text-center">@vuelo.Demorado</th>
+                    <th class="text-center">@(vuelo.Demorado == true ? "Si" : "No")</th>
                     <th class="text-center"><a href="@Url.Action("editar-vuelo", "Home")/@vuelo.ID" class="btn btn-warning">Editar</a></th>
                     <th class="text-center"><a data-toggle="modal" data-id="@vuelo.ID" href="#eliminar" class="btn btn-danger eliminar">Eliminar</a></th>
                 </tr>
@@ -61,7 +59,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Eliminar artículo</h5>
+                <h5 class="modal-title">Eliminar vuelo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

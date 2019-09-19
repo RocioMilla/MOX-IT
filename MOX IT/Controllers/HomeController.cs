@@ -35,16 +35,18 @@ namespace MOX_IT.Controllers
             {
                 ServicioVuelos.crearVuelo(vuelo);
                 TempData["respuesta"] = "Vuelo creado satisfactoriamente.";
-                return Redirect("Vuelos");
+                return Redirect("~/Vuelos");
             }
             else {
-                TempData["error"] = "Vuelo creado satisfactoriamente.";
-                return Redirect("crear-vuelo");
+                TempData["error"] = "Datos incorrectos.";
+                return Redirect("~/crear-vuelo");
             }
         }
 
+        [ActionName("editar-vuelo")]
         public ActionResult ModificarVuelo(int id)
         {
+            ViewBag.lineasAereas = ServicioLineasAereas.obtenerTodas();
             ViewBag.vuelo = ServicioVuelos.obtenerVueloPorID(id);
             return View();
         }
@@ -56,12 +58,19 @@ namespace MOX_IT.Controllers
             {
                 ServicioVuelos.modificarVuelo(vuelo, id);
                 TempData["respuesta"] = "Vuelo modificado satisfactoriamente.";
-                return Redirect("Vuelos");
+                return Redirect("~/Vuelos");
             }
             else {
-                return Redirect("ModificarVuelo");
+                return Redirect("~/ModificarVuelo");
             }
         }
 
+        [HttpPost]
+        public ActionResult eliminarVuelo(int id)
+        {
+            ServicioVuelos.eliminar(id);
+            TempData["respuesta"] = $"Se eliminó el vuelo correctamente.";
+            return Redirect("~/Vuelos");
+        }
     }
 }

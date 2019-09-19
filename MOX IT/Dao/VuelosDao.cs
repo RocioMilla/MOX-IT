@@ -39,6 +39,27 @@ namespace MOX_IT.Dao
                 }
             }
         }
+        public static void eliminarVuelo(int id)
+        {
+            using (var ctx = new VuelosEntities1())
+            {
+                using (var dbContextTransaction = ctx.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var v = ctx.Vuelo.Find(id);
+                        ctx.Vuelo.Remove(v);
+                        ctx.SaveChanges();
+                        dbContextTransaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        throw e;
+                    }
+                }
+            }
+        }
 
         public static void modificarVuelo(VuelosForm vuelo, int id)
         {
@@ -48,12 +69,11 @@ namespace MOX_IT.Dao
                 {
                     try
                     {
-                        Vuelo v = traerVueloPorID(id);
+                        var v = ctx.Vuelo.Find(id);
                         v.NumeroDeVuelo = vuelo.numeroDeVuelo;
                         v.HorarioLlegada = vuelo.horaLlegada;
                         v.Demorado = vuelo.demorado;
                         v.IDLineaAerea = vuelo.lineaAerea;
-                        ctx.Vuelo.Add(v);
                         ctx.SaveChanges();
                         dbContextTransaction.Commit();
                     }
