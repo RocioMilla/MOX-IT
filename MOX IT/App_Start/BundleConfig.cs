@@ -26,6 +26,9 @@ namespace MOX_IT
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/parallax").Include(
+                        "~/Content/parallax.css"));
         }
     }
 }

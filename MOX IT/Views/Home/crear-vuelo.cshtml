@@ -4,58 +4,59 @@
     var tempval = TempData["error"];
 }
 
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <div class="shadow mt-5 p-3 bg-white mb-3">
-            <div class="text-center">
-                <h2>Crear vuelo</h2>
-            </div>
-            <hr />
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="shadow mt-5 p-3 bg-white mb-3">
+                    <div class="text-center">
+                        <h2>Crear vuelo</h2>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
 
-                    @using (Html.BeginForm("AltaVuelo", "Home", FormMethod.Post, new { id = "form" }))
-                    {
-                        <div class="form-group">
-                            <label>Fecha de llegada:</label>
-                            <input type="time" class="form-control" name="horaLlegada" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Vuelo:</label>
-                            <input type="text" class="form-control" name="numeroDeVuelo" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Línea aérea:</label>
-                            <select name="lineaAerea" class="custom-select" required>
-                                @foreach (LineaAerea linea in ViewBag.lineasAereas)
+                            @using (Html.BeginForm("AltaVuelo", "Home", FormMethod.Post, new { id = "form" }))
+                            {
+                                <div class="form-group">
+                                    <label>Fecha de llegada:</label>
+                                    <input type="time" class="form-control" name="horaLlegada" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vuelo:</label>
+                                    <input type="text" class="form-control" name="numeroDeVuelo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Línea aérea:</label>
+                                    <select name="lineaAerea" class="custom-select" required>
+                                        @foreach (LineaAerea linea in ViewBag.lineasAereas)
+                                        {
+                                            <option class="form-control" value="@linea.ID">@linea.Nombre</option>
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="checkbox" name="demorado" value="true"> Demorado
+                                </div>
+                                <div class="text-right">
+                                    <input type="submit" id="enviar" value="Enviar" class="btn btn-success col-md-3" />
+                                </div>
+                                if (tempval != null)
                                 {
-                                    <option class="form-control" value="@linea.ID">@linea.Nombre</option>
+                                    <p class="text-danger">@tempval.ToString()</p>
                                 }
+                            }
 
-                            </select>
                         </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="demorado" value="true"> Demorado
-                        </div>
-                        <div class="text-right">
-                            <input type="submit" id="enviar" value="Enviar" class="btn btn-success col-md-3" />
-                        </div>
-                        if (tempval != null)
-                        {
-                            <p class="text-danger">@tempval.ToString()</p>
-                        }
-                    }
-
+                        <div class="col-md-1"></div>
+                    </div>
                 </div>
-                <div class="col-md-1"></div>
             </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
-    <div class="col-md-2"></div>
-</div>
-
 @section scripts{
     <script>$("#form").validate({
         lang: 'es',
