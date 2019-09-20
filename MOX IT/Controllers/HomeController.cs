@@ -35,11 +35,11 @@ namespace MOX_IT.Controllers
             {
                 ServicioVuelos.crearVuelo(vuelo);
                 TempData["respuesta"] = "Vuelo creado satisfactoriamente.";
-                return Redirect("~/Vuelos");
+                return Redirect("~/Home/Vuelos");
             }
             else {
                 TempData["error"] = "Datos incorrectos.";
-                return Redirect("~/crear-vuelo");
+                return Redirect("~/Home/crear-vuelo");
             }
         }
 
@@ -58,10 +58,10 @@ namespace MOX_IT.Controllers
             {
                 ServicioVuelos.modificarVuelo(vuelo, id);
                 TempData["respuesta"] = "Vuelo modificado satisfactoriamente.";
-                return Redirect("~/Vuelos");
+                return Redirect("~/Home/Vuelos");
             }
             else {
-                return Redirect("~/ModificarVuelo");
+                return Redirect("~/Home/ModificarVuelo");
             }
         }
 
@@ -70,7 +70,7 @@ namespace MOX_IT.Controllers
         {
             ServicioVuelos.eliminar(id);
             TempData["respuesta"] = $"Se eliminó el vuelo correctamente.";
-            return Redirect("~/Vuelos");
+            return Redirect("~/Home/Vuelos");
         }
     }
 }
