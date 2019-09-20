@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dao\LineasAereasDao.cs" />
     <Compile Include="Dao\VuelosDao.cs" />
@@ -216,6 +217,7 @@
     <Content Include="Views\Home\Vuelos.cshtml" />
     <Content Include="Views\Home\crear-vuelo.cshtml" />
     <Content Include="Views\Home\editar-vuelo.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

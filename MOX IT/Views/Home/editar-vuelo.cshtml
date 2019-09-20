@@ -3,64 +3,65 @@
     Vuelo vuelo = ViewBag.vuelo;
     var tempval = TempData["error"];
 }
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <div class="shadow mt-5 p-3 bg-white mb-3">
-                    <div class="text-center">
-                        <h2>Editar vuelo</h2>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="shadow mt-5 p-3 bg-white mb-3">
+                <div class="text-center">
+                    <h2>Editar vuelo</h2>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
 
-                            @using (Html.BeginForm("ModificarVuelo", "Home", FormMethod.Post, new { id = "form" }))
+                        @using (Html.BeginForm("ModificarVuelo", "Home", FormMethod.Post, new { id = "form" }))
+                        {
+                            <input type="hidden" value="@vuelo.ID" name="id" />
+                            <div class="form-group">
+                                <label>Fecha de llegada:</label>
+                                <input type="time" class="form-control" name="horaLlegada" value="@vuelo.HorarioLlegada" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Vuelo:</label>
+                                <input type="text" class="form-control" name="numeroDeVuelo" value="@vuelo.NumeroDeVuelo" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Línea aérea:</label>
+                                <select name="lineaAerea" class="custom-select" required>
+                                    @foreach (LineaAerea linea in ViewBag.lineasAereas)
+                                    {
+                                        <option class="form-control" value="@linea.ID" @(vuelo.LineaAerea.Nombre == linea.Nombre ? "selected" : "")>@linea.Nombre</option>
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="demorado" value="true" @(vuelo.Demorado == true ? "Checked" : "")> Demorado
+                            </div>
+                            <div class="text-right">
+                                <input type="submit" id="enviar" value="Enviar" class="btn btn-success col-md-3" />
+                            </div>
+                            if (tempval != null)
                             {
-                                <input type="hidden" value="@vuelo.ID" name="id" />
-                                <div class="form-group">
-                                    <label>Fecha de llegada:</label>
-                                    <input type="time" class="form-control" name="horaLlegada" value="@vuelo.HorarioLlegada" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Vuelo:</label>
-                                    <input type="text" class="form-control" name="numeroDeVuelo" value="@vuelo.NumeroDeVuelo" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Línea aérea:</label>
-                                    <select name="lineaAerea" class="custom-select" required>
-                                        @foreach (LineaAerea linea in ViewBag.lineasAereas)
-                                        {
-                                            <option class="form-control" value="@linea.ID" @(vuelo.LineaAerea.Nombre == linea.Nombre ? "selected" : "")>@linea.Nombre</option>
-                                        }
-
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="checkbox" name="demorado" value="true" @(vuelo.Demorado == true ? "Checked" : "")> Demorado
-                                </div>
-                                <div class="text-right">
-                                    <input type="submit" id="enviar" value="Enviar" class="btn btn-success col-md-3" />
-                                </div>
-                                if (tempval != null)
-                                {
-                                    <p class="text-danger">@tempval.ToString()</p>
-                                }
+                                <p class="text-danger">@tempval.ToString()</p>
                             }
+                        }
 
-                        </div>
-                        <div class="col-md-1"></div>
                     </div>
+                    <div class="col-md-1"></div>
                 </div>
             </div>
-            <div class="col-md-2"></div>
         </div>
+        <div class="col-md-2"></div>
     </div>
+</div>
 @section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
-$("#form").validate({
-        lang: 'es',
-        errorClass: "text-danger"
+        $("#form").validate({
+            lang: 'es',
+            errorClass: "text-danger"
         });</script>
 }
